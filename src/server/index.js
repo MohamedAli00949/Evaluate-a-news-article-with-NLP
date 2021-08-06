@@ -1,8 +1,28 @@
-var path = require('path')
+const dotenv = require('dotenv');
+dotenv.config();
+
+const path = require('path')
 const express = require('express')
-const mockAPIResponse = require('./mockAPI.js')
+const bodyParser = require('body-parser')
+const cors = require('cors');
+const { url } = require('inspector');
+
+const json = {
+    'title': 'test json response',
+    'message': 'this is a message',
+    'time': 'now'
+}
 
 const app = express()
+
+app.use(cors())
+
+// to use json
+app.use(bodyParser.json())
+// to use url encoded values
+app.use(bodyParser.urlencoded({
+    extended: true
+}))
 
 app.use(express.static('dist'))
 
@@ -10,14 +30,28 @@ console.log(__dirname)
 
 app.get('/', function (req, res) {
     // res.sendFile('dist/index.html')
-    res.sendFile(path.resolve('src/client/views/index.html'))
+    res.sendFile(path.resolve('dist/index.html'))
+})
+
+// api
+const apiKey = process.env.API_KEY 
+console.log(`Your API key is ${apiKey}`);
+
+app.post('/test', async function (req, res) {
+    const formInput = req.body,url;
+    const api = `https://api.meaningcloud.com/sentiment-2.1?key=${apiKey}&lang=en&url=${formInput}`
+
+    const theResponse = await fetch(api)
+    const theData = await theResponse.json()
+    console.log(theData)
+    res.send(theData)
 })
 
 // designates what port the app will listen to for incoming requests
-app.listen(8080, function () {
-    console.log('Example app listening on port 8080!')
+const port = 2000
+app.listen(port, function () {
+    console.log(`Evaluate News NLP app listening on port ${port}!`)
+    console.log(`http://localhost:${port}`)
 })
 
-app.get('/test', function (req, res) {
-    res.send(mockAPIResponse)
-})
+
