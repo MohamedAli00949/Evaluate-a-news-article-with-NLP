@@ -38,7 +38,7 @@ const apiKey = process.env.API_KEY
 console.log(`Your API key is ${apiKey}`);
 
 app.post('/test', async function (req, res) {
-    const formInput = req.body,url;
+    const formInput = req.body.url;
     const api = `https://api.meaningcloud.com/sentiment-2.1?key=${apiKey}&lang=en&url=${formInput}`
 
     const theResponse = await fetch(api)
