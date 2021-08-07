@@ -37,11 +37,7 @@ function handleSubmit(event) {
             document.getElementById("irony").innerHTML = `The irony is<span> ${res.irony} </span>`;
             document.getElementById("text").innerHTML =  `The text is<span> ${res.sentence_list[0].text} </span>`;
         })
-    } else {
-        document.querySelector("#results").innerHTML = ' This is not URL, Please try again '
-        alert(' This is not URL, Please try again ')
-
-    }
+    } 
 }
 
 export { handleSubmit }

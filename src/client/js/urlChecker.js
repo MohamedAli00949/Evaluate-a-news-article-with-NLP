@@ -9,6 +9,7 @@ function checkForUrl(inputText) {
     } else {
         console.log('Not a URI');
         document.querySelector('.results').removeAttribute("data-valid")
+        alert(' This is not URL, Please try again ')
     }
 }
 
