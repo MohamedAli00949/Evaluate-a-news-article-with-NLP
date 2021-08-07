@@ -12,6 +12,10 @@ module.exports = {
     optimization: {
         minimizer: [new TerserPlugin({}), new OptimizeCSSAssetsPlugin({})],
     },
+    output: {
+        libraryTarget: 'var',
+        library: 'Client'
+    },
     module: {
         rules: [
             {
@@ -30,6 +34,7 @@ module.exports = {
             template: "./src/client/views/index.html",
             filename: "./index.html",
         }),
+        
         new MiniCssExtractPlugin({ filename: '[name].css' }),
 
         new WorkboxPlugin.GenerateSW()

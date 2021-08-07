@@ -5,13 +5,7 @@ const path = require('path')
 const express = require('express')
 const bodyParser = require('body-parser')
 const cors = require('cors');
-const { url } = require('inspector');
-
-const json = {
-    'title': 'test json response',
-    'message': 'this is a message',
-    'time': 'now'
-}
+const fetch = require('node-fetch')
 
 const app = express()
 
@@ -36,10 +30,11 @@ app.get('/', function (req, res) {
 // api
 const apiKey = process.env.API_KEY 
 console.log(`Your API key is ${apiKey}`);
+let formInput = []
 
 app.post('/test', async function (req, res) {
-    const formInput = req.body.url;
-    const api = `https://api.meaningcloud.com/sentiment-2.1?key=${apiKey}&lang=en&url=${formInput}`
+    formInput = req.body.url;
+    const api = `https://api.meaningcloud.com/sentiment-2.1?key=${apiKey}&url=${formInput}&lang=en`
 
     const theResponse = await fetch(api)
     const theData = await theResponse.json()

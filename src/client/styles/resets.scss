@@ -53,3 +53,34 @@ table {
 ul {
     list-style-type: none;
 }
+section.results {
+	background: antiquewhite;
+    margin: 50px auto;
+    padding: 20px;
+    border-radius: 20px;
+
+	strong {
+		font-size: 25px;
+		font-family: monospace;
+		font-weight: 600;
+	}
+
+	ul {
+		margin: 20px;
+		background: beige;
+		padding: 16px;
+		border-radius: 20px;
+		border: 2px solid #e4dfdf91;
+
+		li {
+			margin: 8px;
+			font-size: 20px;
+			font-family: system-ui;
+			font-weight: 500;
+
+			span {
+				color: blue;
+			}
+		}
+	}
+}
